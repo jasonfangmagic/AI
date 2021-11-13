@@ -6,6 +6,7 @@ import seaborn as sns
 import keras
 from keras.models import Sequential
 from keras.layers import Dense
+from keras.layers import Dropout
 # Importing the dataset
 dataset = pd.read_csv('Deep_Learning/Part 1 - Artificial Neural Networks/Churn_Modelling.csv')
 X = dataset.iloc[:, 3:-1].values
@@ -36,9 +37,30 @@ sc = StandardScaler()
 X_train = sc.fit_transform(X_train)
 X_test = sc.transform(X_test)
 
-# Part 2 - Building the ANN
+# Part 2 - Building the ANN model
+model = Sequential([
+    Dense(units=16, init = 'uniform', input_dim = 12,activation='relu'),
+    Dense(units=24,activation='relu'),
+    Dropout(0.5),
+    Dense(units=20,activation='relu'),
+    Dense(units=24,activation='relu'),
+    Dense(units=1,activation='sigmoid'),
+])
+
+model.summary()
+
+#compile
+model.compile(optimizer='adam',loss='binary_crossentropy',metrics=['accuracy'])
+
+model.fit(X_train,y_train,batch_size=32,epochs=100)
+
+score = model.evaluate(X_test, y_test)
+
+print(score)
 
 # Initializing the ANN
+classifier = Sequential()
+
 ann = tf.keras.models.Sequential()
 # Adding the input layer and the first hidden layer
 ann.add(tf.keras.layers.Dense(units=6, activation='relu'))
@@ -55,4 +77,6 @@ ann.compile(optimizer = 'adam', loss = 'binary_crossentropy', metrics = ['accura
 # Training the ANN on the Training set
 ann.fit(X_train, y_train, batch_size = 32, epochs = 100)
 
+score = ann.evaluate(X_test, y_test)
 
+print(score)
