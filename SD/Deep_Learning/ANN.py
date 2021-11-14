@@ -147,7 +147,7 @@ def build_classifier():
     model.compile(optimizer = 'adam', loss = 'binary_crossentropy', metrics = ['accuracy'])
     return model
 
-model = KerasClassifier(build_fn=build_classifier, batch_size=32, epochs=100)
+model = KerasClassifier(build_fn=build_classifier, batch_size=25, epochs=100)
 
 accuracies = cross_val_score(estimator=model, X=X_train, y=y_train, cv=10)
 
@@ -171,7 +171,7 @@ print(ann_variance)
 print("ANN Accuracy: %0.3f (+/- %0.3f)" % (accuracies.mean(), accuracies.std() * 2))
 
 #Tuning ANN
-def build_classifier(optimizer):
+def build_classifier(optimizer, loss):
     model = Sequential([
         Dense(units=16, init='uniform', input_dim=12, activation='relu'),
         Dense(units=24, init='uniform', activation='relu'),
@@ -182,7 +182,7 @@ def build_classifier(optimizer):
         Dense(units=30, init='uniform', activation='relu'),
         Dense(units=1, activation='sigmoid'),
     ])
-    model.compile(optimizer = optimizer, loss = 'binary_crossentropy', metrics = ['accuracy'])
+    model.compile(optimizer = optimizer, loss = loss, metrics = ['accuracy'])
     return model
 
 model = KerasClassifier(build_fn=build_classifier)
@@ -196,10 +196,12 @@ grid_search = GridSearchCV(estimator= model,
                            param_grid= parameters,
                            scoring= 'accuracy',
                            cv = 10)
+
 grid_search = grid_search.fit(X_train, y_train)
 
 best_parameters = grid_search.best_params_
+print(best_parameters)
 best_accuracy = grid_search.best_score_
+print(best_accuracy)
 
-accuracies = cross_val_score(estimator=model, X=X_train, y=y_train, cv=10)
 
