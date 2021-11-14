@@ -98,6 +98,7 @@ print(score)
 y_pred = ann.predict(X_test)
 y_pred = y_pred > 0.5
 
+
 from sklearn.metrics import confusion_matrix, accuracy_score, f1_score, precision_score, recall_score
 cm = confusion_matrix(y_test, y_pred)
 print(cm)

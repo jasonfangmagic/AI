@@ -59,20 +59,30 @@ cnn.summary()
 cnn.fit(x = training_set, validation_data = test_set, epochs = 25)
 
 #save model
-import pickle
-with open("cat_dog.pickle", "wb") as f:
-    pickle.dump(cnn, f)
+
+model = cnn
+model.save('/Users/jasonfang/Work/AI/SD/Deep_Learning/cat_dog')
+
+
+model2 = keras.models.load_model('Deep_Learning/cat_dog')
+
+score = model2.evaluate(training_set, test_set)
+# import pickle
+# with open("cat_dog.pickle", "wb") as f:
+#     pickle.dump(cnn, f)
+
+# pickle_in = open("cat_dog.pickle", "rb")
 #
-pickle_in = open("cat_dog.pickle", "rb")
-cnn_model = pickle.load(pickle_in)
+# cnn_model = pickle.load(pickle_in)
 
 #predict model
 from tensorflow.keras.preprocessing import image
-test_image = image.load_img('Deep_Learning/Part 2 - Convolutional Neural Networks/dataset/single_prediction/cat_or_dog_1.jpg', target_size = (64, 64))
+test_image = image.load_img('Deep_Learning/Part 2 - Convolutional Neural Networks/dataset/single_prediction/cat_or_dog_2.jpg', target_size = (64, 64))
 test_image = image.img_to_array(test_image)
 test_image = np.expand_dims(test_image, axis = 0)
 result = cnn.predict(test_image)
 training_set.class_indices
+
 if result[0][0] == 1:
     prediction = 'dog'
 else:
