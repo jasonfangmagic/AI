@@ -27,7 +27,6 @@ cnn.add(tf.keras.layers.Dense(units=128, activation='relu'))
 # Step 5 - Output Layer
 cnn.add(Dropout(0.1))
 cnn.add(tf.keras.layers.Dense(units=1, activation='sigmoid'))
-
 # Compiling the CNN
 cnn.compile(optimizer = 'adam', loss = 'binary_crossentropy', metrics = ['accuracy'])
 
@@ -63,10 +62,10 @@ cnn.fit(x = training_set, validation_data = test_set, epochs = 25)
 model = cnn
 model.save('/Users/jasonfang/Work/AI/SD/Deep_Learning/cat_dog')
 
+#load model
+cnn = keras.models.load_model('Deep_Learning/cat_dog')
 
-model2 = keras.models.load_model('Deep_Learning/cat_dog')
 
-score = model2.evaluate(training_set, test_set)
 # import pickle
 # with open("cat_dog.pickle", "wb") as f:
 #     pickle.dump(cnn, f)
@@ -77,7 +76,7 @@ score = model2.evaluate(training_set, test_set)
 
 #predict model
 from tensorflow.keras.preprocessing import image
-test_image = image.load_img('Deep_Learning/Part 2 - Convolutional Neural Networks/dataset/single_prediction/cat_or_dog_2.jpg', target_size = (64, 64))
+test_image = image.load_img('Deep_Learning/Part 2 - Convolutional Neural Networks/dataset/single_prediction/cat1.png', target_size = (64, 64))
 test_image = image.img_to_array(test_image)
 test_image = np.expand_dims(test_image, axis = 0)
 result = cnn.predict(test_image)

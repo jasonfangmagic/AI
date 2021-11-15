@@ -8,7 +8,7 @@ from keras.models import Sequential
 from keras.layers import Dense
 from keras.layers import Dropout
 from sklearn.model_selection import GridSearchCV
-
+tf.__version__
 
 # Importing the dataset
 dataset = pd.read_csv('Deep_Learning/Part 1 - Artificial Neural Networks/Churn_Modelling.csv')
