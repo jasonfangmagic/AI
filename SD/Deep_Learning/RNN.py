@@ -16,8 +16,8 @@ training_set_scaled = sc.fit_transform(training_set)
 #Creating a data structure with 60 timesteps and 1 output
 X_train = training_set_scaled[0:999]
 y_train = training_set_scaled[1:1000]
-
 X_test = training_set_scaled[1000:]
+
 
 # Creating a data structure with 60 timesteps and 1 output
 # X_train = []
@@ -99,6 +99,5 @@ plt.show()
 #predict price
 import math
 from sklearn.metrics import mean_squared_error
-
 rmse = math.sqrt(mean_squared_error(training_set_scaled[1000:],regressor.predict(X_test)))
 print(rmse)
