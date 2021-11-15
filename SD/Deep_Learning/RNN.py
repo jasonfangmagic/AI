@@ -96,7 +96,7 @@ plt.ylabel('Google Stock Price')
 plt.legend()
 plt.show()
 
-#predict price
+#predict pricejj
 import math
 from sklearn.metrics import mean_squared_error
 rmse = math.sqrt(mean_squared_error(training_set_scaled[1000:],regressor.predict(X_test)))
