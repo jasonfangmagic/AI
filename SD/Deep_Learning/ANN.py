@@ -3,10 +3,10 @@ import numpy as np
 import tensorflow as tf
 import matplotlib.pyplot as plt
 import seaborn as sns
-import keras
-from keras.models import Sequential
-from keras.layers import Dense
-from keras.layers import Dropout
+from tensorflow import keras
+from tensorflow.keras.models import Sequential
+from tensorflow.keras.layers import Dense
+from tensorflow.keras.layers import Dropout
 from sklearn.model_selection import GridSearchCV
 tf.__version__
 
